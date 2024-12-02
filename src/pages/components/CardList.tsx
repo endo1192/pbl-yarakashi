@@ -7,6 +7,10 @@ interface BDataProps {
 }
 
 const CardList = ({bCardList}: BDataProps) => {
+
+  if (!bCardList || !Array.isArray(bCardList)) {
+    return <div>データが存在しません。</div>;
+  }
   
   return (
     <div className="grid lg:grid-cols-3 px-4 py-4 gap-4">
