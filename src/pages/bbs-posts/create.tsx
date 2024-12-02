@@ -33,7 +33,7 @@ const formSchema = z.object({
       .max(150, {message: "本文は150文字以内で入力してください"}),
 })
 
-const createPage = () => {
+const CreatePage = () => {
 
     const router = useRouter();
 
@@ -123,4 +123,4 @@ const createPage = () => {
     );
 };
 
-export default createPage;
+export default CreatePage;
