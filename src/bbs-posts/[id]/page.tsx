@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import CardList from "../../pages/components/CardList";
 import { BData } from "../../types/types";
 
 // 非同期にデータを取得する関数

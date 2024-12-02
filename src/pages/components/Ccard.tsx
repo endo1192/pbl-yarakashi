@@ -19,7 +19,7 @@ const Ccard = ({bbData}: BBDataProps) => {
         return <div>No data available</div>; // bbDataがない場合の処理
       }
 
-  const { id, title, content, createdAt, username } = bbData;
+  const { id, title, content, username } = bbData;
 
   return (
       <Card className="w-[350px]">

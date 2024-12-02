@@ -3,12 +3,15 @@ import Link from 'next/link';
 interface Bques1Props {
   arrayn: number[];
   answer: number[];
+  selected: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getServerSideProps({ req }: any) {
   // リクエストのURLからクエリパラメータを取得する
   const query = new URL(req.url || '', `http://${req.headers.host}`).searchParams;
+
+  const selected = query.get('selected') ? parseInt(query.get('selected') as string, 10) : 0;
 
 
   
@@ -35,13 +38,14 @@ export async function getServerSideProps({ req }: any) {
 
   return {
     props: {
+      selected,
       arrayn: Carray,
       answer: Canswer,
     },
   };
 }
 
-export default function Bans1({ arrayn, answer }: Bques1Props) {
+export default function Bans1({ arrayn, answer, selected }: Bques1Props) {
   
 
 
@@ -158,6 +162,25 @@ export default function Bans1({ arrayn, answer }: Bques1Props) {
     }
   }
 
+  const Gamen: string[] = ["d","d","d","d","d","d","d","d","d","d"]
+
+  const Hselected = selected - 1
+
+  for(let i = 0; i<=9; i++){
+    if(Canswer[i] == 0){
+      Gamen[i] = `第${i+1}問:不正解`
+    } else if(Canswer[i] == 1){
+      Gamen[i] = `第${i+1}問:不正解`
+    } else{
+      Gamen[i] = "error"
+    }
+
+    if(i > Hselected){
+      Gamen[i] = ""
+      Kaisetsu[i] = ""
+    }
+  }
+
 
   
 
@@ -169,16 +192,16 @@ export default function Bans1({ arrayn, answer }: Bques1Props) {
       <p>結果: {}</p>
       <p>{Canswer}</p>
       <p>{Carray}</p>
-      <p>第1問:{Kaito[0]},{Kaisetsu[0]}</p><br /><br />
-      <p>第2問:{Kaito[1]},{Kaisetsu[1]}</p><br /><br />
-      <p>第3問:{Kaito[2]},{Kaisetsu[2]}</p><br /><br />
-      <p>第4問:{Kaito[3]},{Kaisetsu[3]}</p><br /><br />
-      <p>第5問:{Kaito[4]},{Kaisetsu[4]}</p><br /><br />
-      <p>第6問:{Kaito[5]},{Kaisetsu[5]}</p><br /><br />
-      <p>第7問:{Kaito[6]},{Kaisetsu[6]}</p><br /><br />
-      <p>第8問:{Kaito[7]},{Kaisetsu[7]}</p><br /><br />
-      <p>第9問:{Kaito[8]},{Kaisetsu[8]}</p><br /><br />
-      <p>第10問:{Kaito[9]},{Kaisetsu[9]}</p><br /><br />
+      <p>{Gamen[0]}{Kaisetsu[0]}</p><br /><br />
+      <p>{Gamen[1]}{Kaisetsu[1]}</p><br /><br />
+      <p>{Gamen[2]}{Kaisetsu[2]}</p><br /><br />
+      <p>{Gamen[3]}{Kaisetsu[3]}</p><br /><br />
+      <p>{Gamen[4]}{Kaisetsu[4]}</p><br /><br />
+      <p>{Gamen[5]}{Kaisetsu[5]}</p><br /><br />
+      <p>{Gamen[6]}{Kaisetsu[6]}</p><br /><br />
+      <p>{Gamen[7]}{Kaisetsu[7]}</p><br /><br />
+      <p>{Gamen[8]}{Kaisetsu[8]}</p><br /><br />
+      <p>{Gamen[9]}{Kaisetsu[9]}</p><br /><br />
     </div>
   );
 }

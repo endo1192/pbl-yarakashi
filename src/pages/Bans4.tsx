@@ -4,20 +4,24 @@ import Link from 'next/link';
 interface Bans1Props {
   num: string;
   count: number;
+  selected: number;
   arrayn: number[];
   answer: number[];
 }
 
-export default function Bans1({ num, count, arrayn, answer }: Bans1Props) {
+export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Props) {
   const [showPopup, setShowPopup] = useState(false);
 
   const Cnumber = count;
   const Carray = arrayn;
   const Canswer = answer;
+  const Selected = selected;
 
   let pagen = Carray[Cnumber];
 
-  if (Cnumber > 9) {
+  const Hselected = Selected - 1;
+
+  if (Cnumber > Hselected) {
     pagen = 11;
   }
 
@@ -64,6 +68,7 @@ export default function Bans1({ num, count, arrayn, answer }: Bans1Props) {
             arrayn: JSON.stringify(Carray),
             count: Cnumber,
             answer: JSON.stringify(Canswer),
+            selected: Selected,
           },
         }}
       >
@@ -113,6 +118,7 @@ export async function getServerSideProps({ req }: any) {
 
   const num = query.get('num') || "0";
   const count = query.get('count') ? parseInt(query.get('count') as string, 10) : 0;
+  const selected = query.get('selected') ? parseInt(query.get('selected') as string, 10) : 0;
   
   // arraynとanswerをパース
   let Carray: number[] = [];
@@ -139,6 +145,7 @@ export async function getServerSideProps({ req }: any) {
     props: {
       num,
       count,
+      selected,
       arrayn: Carray,
       answer: Canswer,
     },
