@@ -49,7 +49,7 @@ const CreatePage = () => {
     async function onSubmit (value: z.infer<typeof formSchema>) {
         const { username, title, content } = value;
         try {
-            await fetch("http://localhost:3000/api/post", {
+            await fetch("https://pbl-yarakashi.vercel.app/api/post", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

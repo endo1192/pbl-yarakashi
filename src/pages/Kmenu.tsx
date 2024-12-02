@@ -6,7 +6,7 @@ import { BData } from "../types/types";
 
 // 非同期にデータを取得する関数
 async function getData(): Promise<BData[]> {
-  const response = await fetch("http://localhost:3000/api/post", {
+  const response = await fetch("https://pbl-yarakashi.vercel.app/api/post", {
     cache: "no-store",
   });
 
