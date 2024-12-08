@@ -9,9 +9,6 @@
       "env": {
         "DATABASE_URL": "@your-database-url-env-variable"
       }
-    },
-    "scripts": {
-      "postbuild": "prisma migrate deploy"
     }
   }
   
