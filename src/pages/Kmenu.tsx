@@ -11,15 +11,20 @@ async function getData(): Promise<BData[]> {
     });
 
     if (!response.ok) {
-      console.error(`HTTP error! status: ${response.status}`);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const bCardList: BData[] = await response.json();
     return bCardList;
-  } catch (error) {
-    console.error("Failed to fetch data:", error);
-    throw error; // エラーを上位でキャッチするために再スロー
+  } catch (error: unknown) {
+    // 型アサーションを使ってエラーの型を指定
+    if (error instanceof Error) {
+      console.error("Failed to fetch data:", error.message);
+      throw error; // エラーを再スロー
+    }
+    // unknown型の場合、適切なエラーハンドリングを行う
+    console.error("An unknown error occurred.");
+    throw new Error("An unknown error occurred.");
   }
 }
 
@@ -29,15 +34,18 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null); // エラーメッセージを管理
 
   useEffect(() => {
-    // コンポーネントがマウントされた後にデータを取得
     const fetchData = async () => {
       try {
         const data = await getData();
         setBCardList(data);  // データをstateにセット
-      } catch (error: any) {
-        setError(error.message || "An unknown error occurred"); // エラー内容をセット
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message); // エラーがErrorオブジェクトであればそのメッセージを表示
+        } else {
+          setError("An unknown error occurred.");
+        }
       } finally {
-        setLoading(false);  // ローディング終了
+        setLoading(false); // ローディング終了
       }
     };
 
@@ -45,25 +53,28 @@ export default function Home() {
   }, []);  // 空の依存配列で初回のみ実行
 
   if (loading) {
-    return <div>Loading中です...</div>;  // ローディング中に表示する内容
+    return <div>Loading...</div>; // ローディング中に表示する内容
   }
 
   if (error) {
     return (
       <div>
-        <p>Error fetching data: {error}</p>
-        <button onClick={() => location.reload()}>Retry</button>
+        <h2>Error occurred while fetching data</h2>
+        <p>{error}</p>
+        <button onClick={() => location.reload()} className="bg-red-500 text-white py-2 px-4 rounded-md">
+          再試行
+        </button>
       </div>
-    ); // エラー時に表示する内容
+    );
   }
 
   if (!bCardList || bCardList.length === 0) {
-    return <div>No data available</div>;  // データがない場合
+    return <div>No data available</div>; // データが空の場合
   }
 
   return (
     <>
-      <Link href="/" className="px-4 py-4 gap-4">ホームに戻る</Link>
+      <Link href="/" className=" px-4 py-4 gap-4">ホームに戻る</Link>
       <Link href="/bbs-posts/create" className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">投稿</Link>
       <br /><br /> 
       <h1>やらかし掲示板</h1>
