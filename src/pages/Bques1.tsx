@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Button } from "@/components/ui/button"
 
 
 interface Bques1Props {
@@ -66,7 +65,7 @@ export default function Home({ count, arrayn, answer, selected }: Bques1Props) {
 
   return ( 
     <div className="answer">
-      <Button><Link href="/">はじめに戻る</Link></Button><br /><br /><br />
+      <br /><br /><br />
       <p>第{Cnumber}問1、～</p><br />
       <p>歩いている時に、スマホの通知が鳴った。 </p><br /><br />
       <p>{Carray}</p>

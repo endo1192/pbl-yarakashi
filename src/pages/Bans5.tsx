@@ -46,7 +46,6 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
 
   return (
     <div className="answer">
-      <Link href="/">はじめに戻る</Link>
       <br />
       <br />
       <br />

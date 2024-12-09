@@ -186,7 +186,7 @@ export default function Bans1({ arrayn, answer, selected }: Bques1Props) {
 
   return (
     <div>
-        <Link href="/">はじめに戻る</Link><br /><br /><br />
+      <br /><br /><br />
       <h1>正解発表fin</h1>
       <p>選択された回答: </p><br /><br />
       <p>結果: {}</p>

@@ -30,7 +30,6 @@ export default function Home() {
 
   return (
     <>
-      <Link href="/">はじめに戻る</Link>
       <br /><br /><br />
       <p>ビギナークラス・問題は10問</p><br /><br />
       <Sselect className="QNumber" value={selectedNumber} onChange={(e) => setSelectedNumber(Number(e.target.value))}>
