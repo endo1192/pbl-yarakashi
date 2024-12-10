@@ -169,7 +169,7 @@ export default function Bans1({ arrayn, answer, selected }: Bques1Props) {
     if(Canswer[i] == 0){
       Gamen[i] = `第${i+1}問:不正解`
     } else if(Canswer[i] == 1){
-      Gamen[i] = `第${i+1}問:不正解`
+      Gamen[i] = `第${i+1}問:正解`
     } else{
       Gamen[i] = "error"
     }
