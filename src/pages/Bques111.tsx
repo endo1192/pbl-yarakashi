@@ -296,6 +296,7 @@ export default function Bans1({ arrayn, answer, selected }: Bques1Props) {
 このように、軽い気持ちで撮影して投稿したことが、お店や自分に大きな影響を与えることがあります。 
 だから、そのような行動は絶対にしないようにしましょう！ 
 
+
  
 
  △：友達しか見られないので問題はない 
