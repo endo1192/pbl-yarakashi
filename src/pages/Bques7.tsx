@@ -69,9 +69,9 @@ export default function Home({ count, arrayn, answer, selected }: Bques1Props) {
     <div className="answer">
       <br />
       <p>パスワードを設定しよう </p><br /><br />
-      <p>第{Cnumber}問7、～</p><br /><br /><br />
-      <p>{Carray}</p>
-      <p>{Canswer}</p>
+
+      <p>第{Cnumber}問7</p><br /><br /><br />
+      
       <li>
       <Link href={{ pathname: '/Bans7', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1自分にしかわからないパスワードにする </Link></li><br />
       <li><Link href={{ pathname: '/Bans7', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:生年月日に設定する</Link></li><br />

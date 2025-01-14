@@ -68,14 +68,13 @@ export default function Home({ count, arrayn, answer, selected }: Bques1Props) {
   return ( 
     <div className="answer">
       <br /><br /><br />
-      <p>第{Cnumber}問4、～</p><br />
-      <p>SNSでゲームをくれるという人と仲良くなり、会う日時を提示された。 </p><br /><br />
-      <p>{Carray}</p>
-      <p>{Canswer}</p>
+      <p>第{Cnumber}問4</p><br />
+      <p>お店でふざけている友達を撮影し、SNSに投稿した。</p><br /><br />
+      
       <li>
-      <Link href={{ pathname: '/Bans4', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1:ネットでしかつながりの無い人には会わない。</Link></li><br />
-      <li><Link href={{ pathname: '/Bans4', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:ゲームが欲しいので会いに行く。 </Link></li><br />
-      <li><Link href={{ pathname: '/Bans4', query: { num: 3, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>3:ゲームは欲しいので、親と一緒に会いに行く。 </Link></li><br />
+      <Link href={{ pathname: '/Bans4', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1:友達にしか見られないので問題はない</Link></li><br />
+      <li><Link href={{ pathname: '/Bans4', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:友達も私も楽しいので問題はない</Link></li><br />
+      <li><Link href={{ pathname: '/Bans4', query: { num: 3, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>3:ふざけるのはよくないことだし、問題になる可能性があるのでそんなことはしない。</Link></li><br />
       <li><Link href={{ pathname: '/Bans4', query: { num: 4, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>選択肢4</Link>
       </li>
     </div>

@@ -1,8 +1,11 @@
+import Link from 'next/link';
+
 
 interface Bques1Props {
+  count: number;
+  selected: number;
   arrayn: number[];
   answer: number[];
-  selected: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,8 +14,8 @@ export async function getServerSideProps({ req }: any) {
   const query = new URL(req.url || '', `http://${req.headers.host}`).searchParams;
 
   const selected = query.get('selected') ? parseInt(query.get('selected') as string, 10) : 0;
-
-
+  
+  const count = query.get('count') ? parseInt(query.get('count') as string, 10) : 0;
   
   // arraynとanswerをパース
   let Carray: number[] = [];
@@ -37,6 +40,7 @@ export async function getServerSideProps({ req }: any) {
 
   return {
     props: {
+      count,
       selected,
       arrayn: Carray,
       answer: Canswer,
@@ -44,163 +48,35 @@ export async function getServerSideProps({ req }: any) {
   };
 }
 
-export default function Bans1({ arrayn, answer, selected }: Bques1Props) {
-  
 
+export default function Home({ count, arrayn, answer, selected }: Bques1Props) {
+  
 
   const Carray = arrayn;
   const Canswer = answer;
 
-  const Kaito: string[] = ["d","d","d","d","d","d","d","d","d","d"]
+  const Selected = selected;
 
-  for(let i = 0;i<=9;i++){
-    if(Canswer[i] == 0){
-      Kaito[i] = "不正解です"
-    }else if(Canswer[i] == 1){
-      Kaito[i] = "正解です"
-    }else{Kaito[i] = "error"}
-  }
+  const Fnumber = count;
 
-  const Kaisetsu: string[] = ["d","d","d","d","d","d","d","d","d","d"]
-
-  for(let i = 0;i<=9;i++){
-    switch(Carray[i]){
-      case 1:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "1F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "1T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 2:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "2F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "2T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 3:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "3F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "3T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 4:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "4F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "4T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 5:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "5F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "5T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 6:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "6F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "6T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 7:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "7F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "7T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 8:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "8F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "8T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 9:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "9F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "9T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      case 10:
-        if(Canswer[i] == 0){
-          Kaisetsu[i] = "10F"
-        }else if(Canswer[i] == 1){
-          Kaisetsu[i] = "10T"
-        }else{
-          Kaisetsu[i] = "Error"
-        }
-        break;
-      default:
-        Kaisetsu[i] = "2Error"
-        break;
-    }
-  }
-
-  const Gamen: string[] = ["d","d","d","d","d","d","d","d","d","d"]
-
-  const Hselected = selected - 1
-
-  for(let i = 0; i<=9; i++){
-    if(Canswer[i] == 0){
-      Gamen[i] = `第${i+1}問:不正解`
-    } else if(Canswer[i] == 1){
-      Gamen[i] = `第${i+1}問:正解`
-    } else{
-      Gamen[i] = "error"
-    }
-
-    if(i > Hselected){
-      Gamen[i] = ""
-      Kaisetsu[i] = ""
-    }
-  }
+  const Cnumber = Fnumber + 1
 
 
-  
 
-  return (
-    <div>
+  return ( 
+    <div className="answer">
       <br /><br /><br />
-      <h1>正解発表fin</h1>
-      <p>選択された回答: </p><br /><br />
-      <p>結果: {}</p>
-      <p>{Canswer}</p>
-      <p>{Carray}</p>
-      <p>{Gamen[0]}{Kaisetsu[0]}</p><br /><br />
-      <p>{Gamen[1]}{Kaisetsu[1]}</p><br /><br />
-      <p>{Gamen[2]}{Kaisetsu[2]}</p><br /><br />
-      <p>{Gamen[3]}{Kaisetsu[3]}</p><br /><br />
-      <p>{Gamen[4]}{Kaisetsu[4]}</p><br /><br />
-      <p>{Gamen[5]}{Kaisetsu[5]}</p><br /><br />
-      <p>{Gamen[6]}{Kaisetsu[6]}</p><br /><br />
-      <p>{Gamen[7]}{Kaisetsu[7]}</p><br /><br />
-      <p>{Gamen[8]}{Kaisetsu[8]}</p><br /><br />
-      <p>{Gamen[9]}{Kaisetsu[9]}</p><br /><br />
+      <p>第{Cnumber}問11</p><br />
+      <p>代わりにゲームをクリアしてくれるというネットのゲーム友達に自分のアカウント情報を教えようとしている</p><br /><br />
+
+      
+      <li>
+      <Link href={{ pathname: '/Bans11', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1:ゲームを進めたいのですぐに教える</Link></li><br />
+      <li><Link href={{ pathname: '/Bans11', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:安易に自分のアカウントの情報は教えない</Link></li><br />
+      <li><Link href={{ pathname: '/Bans11', query: { num: 3, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>3:アカウントのIDとパスワードを教えるだけなら問題ないのでこれらを教える</Link></li><br />
+      <li><Link href={{ pathname: '/Bans11', query: { num: 4, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>選択肢4</Link>
+      </li>
     </div>
+          
   );
 }

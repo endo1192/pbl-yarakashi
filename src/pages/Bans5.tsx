@@ -22,15 +22,15 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
   const Hselected = Selected - 1;
 
   if (Cnumber > Hselected) {
-    pagen = 11;
+    pagen = 111;
   }
 
   let answ = null;
 
-  if (num === "1") {
+  if (num === "2") {
     answ = "正解です！";
     Canswer[Cnumber - 1] = 1;
-  } else if (num === "2") {
+  } else if (num === "1") {
     answ = "残念、不正解です";
   } else if (num === "3") {
     answ = "残念、不正解です";
@@ -49,14 +49,14 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
       <br />
       <br />
       <br />
-      <h1>{Cnumber}mon,正解発表,5</h1>
+      <h1>{Cnumber}問,正解発表,5</h1>
       <p>選択された回答: {num}</p>
       <br />
       <br />
       <p>結果: {answ}</p>
-      <p>{JSON.stringify(Canswer)}</p>
+      
 
-      <button onClick={togglePopup}>解説を見る</button>
+      <button onClick={togglePopup}><h1 className="bg-green-500 text-white font-bold py-1 px-4 rounded-md">解説を見る</h1></button>
 
       <br />
       <br />
@@ -78,7 +78,7 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
         <div className="popup">
           <div className="popup-content">
             <button onClick={togglePopup}>閉じる</button>
-            <img src="./images/signal.jpg" alt="ポップアップ画像" />
+            <img src="./images/pbl9.jpg" alt="ポップアップ画像" />
           </div>
         </div>
       )}
@@ -86,10 +86,10 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
       <style jsx>{`
         .popup {
           position: fixed;
-          top: 0;
+          bottom: 30px;
           left: 0;
           width: 100%;
-          height: 100%;
+          height: 80%;
           background: rgba(0, 0, 0, 0.5);
           display: flex;
           justify-content: center;
@@ -104,6 +104,7 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
         img {
           width: 50%;
           height: 50%;
+          margin: auto;
         }
       `}</style>
     </div>

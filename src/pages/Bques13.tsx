@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 
-
 interface Bques1Props {
   count: number;
   selected: number;
@@ -15,7 +14,6 @@ export async function getServerSideProps({ req }: any) {
   const query = new URL(req.url || '', `http://${req.headers.host}`).searchParams;
 
   const selected = query.get('selected') ? parseInt(query.get('selected') as string, 10) : 0;
-
   
   const count = query.get('count') ? parseInt(query.get('count') as string, 10) : 0;
   
@@ -68,14 +66,15 @@ export default function Home({ count, arrayn, answer, selected }: Bques1Props) {
   return ( 
     <div className="answer">
       <br /><br /><br />
-      <p>第{Cnumber}問8</p><br />
-      <p>個人情報を24時間以内に送信しないとゲームが使えなくなる、という通知がきた</p><br /><br />
+      <p>第{Cnumber}問13</p><br />
+      <p>ライブのチケットについて</p><br /><br />
+
       
       <li>
-      <Link href={{ pathname: '/Bans8', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1:怪しいので送らない</Link></li><br />
-      <li><Link href={{ pathname: '/Bans8', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:自分の個人情報を送信するのは怖いので、親の情報を送信した</Link></li><br />
-      <li><Link href={{ pathname: '/Bans8', query: { num: 3, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>3:普通に個人情報を入力して送る</Link></li><br />
-      <li><Link href={{ pathname: '/Bans8', query: { num: 4, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>選択肢4</Link>
+      <Link href={{ pathname: '/Bans13', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1:公式の販売でチケットを取れなかったので、フリマサイトで転売されているチケットを購入する</Link></li><br />
+      <li><Link href={{ pathname: '/Bans13', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:チケットが余ってしまったので、チケットをフリマサイトで定価よりも高い値段で売った</Link></li><br />
+      <li><Link href={{ pathname: '/Bans13', query: { num: 3, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>3:公式の販売でチケットをとれなかったので、公式のリセールサイトを利用してチケットの獲得を試みる</Link></li><br />
+      <li><Link href={{ pathname: '/Bans13', query: { num: 4, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>選択肢4</Link>
       </li>
     </div>
           

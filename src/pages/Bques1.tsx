@@ -66,10 +66,10 @@ export default function Home({ count, arrayn, answer, selected }: Bques1Props) {
   return ( 
     <div className="answer">
       <br /><br /><br />
-      <p>第{Cnumber}問1、～</p><br />
+      <p>第{Cnumber}問1</p><br />
       <p>歩いている時に、スマホの通知が鳴った。 </p><br /><br />
-      <p>{Carray}</p>
-      <p>{Canswer}</p>
+
+      
       <li>
       <Link href={{ pathname: '/Bans1', query: { num: 1, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>1:スマホを見ると危ないので、歩きながら確認はしない。</Link></li><br />
       <li><Link href={{ pathname: '/Bans1', query: { num: 2, arrayn: JSON.stringify(Carray), count: Cnumber, answer: JSON.stringify(Canswer), selected: Selected, } }}>2:通知の内容が気になるので、歩きながら確認する。</Link></li><br />

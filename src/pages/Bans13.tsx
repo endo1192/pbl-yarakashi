@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+
 interface Bans1Props {
   num: string;
   count: number;
@@ -17,9 +18,9 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
   const Canswer = answer;
   const Selected = selected;
 
-  const Hselected = Selected - 1;
-
   let pagen = Carray[Cnumber];
+
+  const Hselected = Selected - 1;
 
   if (Cnumber > Hselected) {
     pagen = 111;
@@ -49,7 +50,7 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
       <br />
       <br />
       <br />
-      <h1>{Cnumber}問,正解発表,9</h1>
+      <h1>{Cnumber}問,正解発表,1</h1>
       <p>選択された回答: {num}</p>
       <br />
       <br />
@@ -78,7 +79,7 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
         <div className="popup">
           <div className="popup-content">
             <button onClick={togglePopup}>閉じる</button>
-            <img src="./images/pbl6.jpg" alt="ポップアップ画像" />
+            <img src="./images/pbl13.jpg" alt="ポップアップ画像" />
           </div>
         </div>
       )}
