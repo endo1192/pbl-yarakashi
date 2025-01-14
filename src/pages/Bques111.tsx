@@ -301,6 +301,7 @@ export default function Bans1({ arrayn, answer, selected }: Bques1Props) {
 
  △：友達しか見られないので問題はない 
 
+ 
 これも注意が必要です！ 
 
 例えば、SNSの投稿を「フォロワー限定」にして、友達だけが見られる設定にしたとしても、100%安全とは言えません。 
