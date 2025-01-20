@@ -21,8 +21,8 @@ export default function Home() {
         <br /><br /><br /><br /><br /><br />
         <p>情報リテラシー</p>
         <p>やらかし事例クイズ</p>
-        <Link href="/StartWorld"><Image src="/images/start.png" alt="background" width={300}height={120} /></Link>
-        <Button><Link href="/Kmenu">やらかし掲示板</Link></Button>
+        <Link href="/StartWorld"><Image src="/images/start.jpg" alt="background" width={300}height={120} /></Link>
+        <Button><Link href="/Kmenu" passHref>やらかし掲示板</Link></Button>
         {/*<p><Link href="/Bstart">beginerコース</Link></p>*/}
           
         </main>

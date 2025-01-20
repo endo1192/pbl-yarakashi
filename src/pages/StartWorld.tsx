@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 //import * as BABYLON from 'babylonjs';
-//import 'babylonjs-loaders';
+import 'babylonjs-loaders';
 import { Engine, Scene, Vector3, FreeCamera, HemisphericLight, SceneLoader, PointerEventTypes, AbstractMesh } from 'babylonjs';
 import { AdvancedDynamicTexture, Button, Control } from 'babylonjs-gui';
 import { useRouter } from 'next/router';

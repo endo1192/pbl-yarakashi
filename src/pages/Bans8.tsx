@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import styles from '@/styles/image.module.css';
 
 interface Bans1Props {
   num: string;
@@ -78,7 +80,7 @@ export default function Bans1({ num, count, arrayn, answer, selected }: Bans1Pro
         <div className="popup">
           <div className="popup-content">
             <button onClick={togglePopup}>閉じる</button>
-            <img src="./images/pbl10.jpg" alt="ポップアップ画像" />
+            <Image src="/images/pbl10.jpg" alt="ポップアップ画像" className={styles.image} layout="responsive" width={800} height={800}/>
           </div>
         </div>
       )}
