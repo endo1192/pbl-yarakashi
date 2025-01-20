@@ -22,15 +22,26 @@ const nextConfig: NextConfig = {
     return config;
   },*/
 
-  webpack: (config) => {
+  /*webpack: (config) => {
     config.optimization.splitChunks = {
       chunks: 'all',
       maxSize: 2500000,
     };
     config.resolve.fallback = { fs: false, path: false };
     return config;
+  },*/
+
+  webpack(config, { isServer }) {
+    if (!isServer) {
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        minSize: 10000,
+      };
+    }
+    return config;
   },
 
+  
 };
 
 export default withBundleAnalyzer(nextConfig);

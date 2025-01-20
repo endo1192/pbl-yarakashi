@@ -19,7 +19,6 @@
     "@types/next": "^9.0.0",
     "babylonjs": "^7.37.0",
     "babylonjs-gui": "^7.37.0",
-    "babylonjs-loaders": "^7.37.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
@@ -33,6 +32,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/babylonjs": "^2.3.31",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

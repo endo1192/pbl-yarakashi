@@ -1,10 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-//import * as BABYLON from 'babylonjs';
-import 'babylonjs-loaders';
-import { Engine, Scene, Vector3, FreeCamera, HemisphericLight, SceneLoader, PointerEventTypes, AbstractMesh } from 'babylonjs';
-import { AdvancedDynamicTexture, Button, Control } from 'babylonjs-gui';
 import { useRouter } from 'next/router';
-import styled from "styled-components";
 
 const BabylonScene = () => {
   const canvasRef = useRef(null);
@@ -13,10 +8,10 @@ const BabylonScene = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // シーンの初期化
+    
     const canvas = canvasRef.current as HTMLCanvasElement | null;
-    const engine = new Engine(canvas, true);
-    const scene = new Scene(engine);
+    const engine = new BABYLON.Engine(canvas, true);
+    const scene = new BABYLON.Scene(engine);
 
     
     if (!canvas) {
@@ -29,21 +24,21 @@ const BabylonScene = () => {
     canvas.style.height = '100%';
     canvas.style.display = 'block';
 
-    scene.gravity = new Vector3(0, -0.9, 0);
+    scene.gravity = new BABYLON.Vector3(0, -0.9, 0);
 
     
-    const camera = new FreeCamera("camera1", new Vector3(3, 2, 30), scene);
+    const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(3, 2, 30), scene);
     
     camera.attachControl(canvas, true);
     camera.inputs.addMouseWheel();
         
-    camera.setTarget(Vector3.Zero());
+    camera.setTarget(BABYLON.Vector3.Zero());
    
     scene.collisionsEnabled = true;
  
     camera.checkCollisions = true;
         
-    camera.ellipsoid = new Vector3(1,1,0.7);
+    camera.ellipsoid = new BABYLON.Vector3(1,1,0.7);
 
     camera.applyGravity = true;
 
@@ -52,7 +47,7 @@ const BabylonScene = () => {
     camera.inertia = 0.8;
     
     
-    const light = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
+    const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
     console.log(light); 
 
     let isJumping = false;
@@ -60,9 +55,9 @@ const BabylonScene = () => {
     const jumpHeight = 2.1;   
     
 
-    const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    const advancedTexture = BABYLON.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-    const jumpButton = Button.CreateSimpleButton("jumpButton", "Jump");
+    const jumpButton = BABYLON.Button.CreateSimpleButton("jumpButton", "Jump");
     jumpButton.width = "150px";
     jumpButton.height = "40px";
     jumpButton.color = "white";
@@ -70,8 +65,8 @@ const BabylonScene = () => {
 
 
         
-    jumpButton.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    jumpButton.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
+    jumpButton.horizontalAlignment = BABYLON.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    jumpButton.verticalAlignment = BABYLON.Control.VERTICAL_ALIGNMENT_BOTTOM;
     jumpButton.left = "-20px"; 
     jumpButton.top = "-20px"; 
 
@@ -110,7 +105,7 @@ const BabylonScene = () => {
 
             
             const forward = camera.getFrontPosition(1).subtract(camera.position).normalize();
-            const right = Vector3.Cross(forward, camera.upVector).normalize();
+            const right = BABYLON.Vector3.Cross(forward, camera.upVector).normalize();
 
             
             const moveVector = forward.scale(-joystickDelta.y).add(right.scale(-joystickDelta.x));
@@ -139,16 +134,7 @@ const BabylonScene = () => {
         joystickContainer.style.borderRadius = "50%";
         document.body.appendChild(joystickContainer);
 
-        /*const joystickContainer = new GUI.Rectangle();
-        joystickContainer.width = "100px"; // Width of the joystick container
-        joystickContainer.height = "100px"; // Height of the joystick container
-        joystickContainer.color = "white"; // Border color of the joystick
-        joystickContainer.thickness = 0; // No border thickness
-        joystickContainer.background = "rgba(0, 0, 0, 0.5)"; // Background color
-        joystickContainer.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-        joystickContainer.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        joystickContainer.left = "10px"; // Left margin
-        joystickContainer.top = "-10px"; // Top margin*/
+        
 
         const joystickPuck = document.createElement("div");
         joystickPuck.style.position = "absolute";
@@ -160,35 +146,11 @@ const BabylonScene = () => {
         joystickPuck.style.borderRadius = "50%";
         joystickContainer.appendChild(joystickPuck);
 
-        /*const joystickPuck = new GUI.Ellipse();
-joystickPuck.width = "20px"; // Width of the joystick puck
-joystickPuck.height = "20px"; // Height of the joystick puck
-joystickPuck.background = "gray"; // Background color
-joystickPuck.color = "white"; // Border color
-joystickPuck.thickness = 2; // Border thickness
-joystickPuck.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
-
-        
-
-        /*joystickContainer.addControl(joystickPuck);
-
-        advancedTexture.addControl(joystickContainer);*/
 
         let isDraggingJoystick = false;
         let initialTouchPoint = { x: 0, y: 0 };
         let joystickDelta = { x: 0, y: 0 };
 
-        
-        /*joystickContainer.onPointerDownObservable.add((eventData: BABYLON.IPointerEvent) => {
-            isDraggingJoystick = true;
-            initialTouchPoint = { x: eventData.event.clientX, y: eventData.y };
-
-            
-                pointerEvent.preventDefault(); // Prevent default behavior
-            
-
-        });*/
 
         joystickContainer.addEventListener("pointerdown", (event) => {
             isDraggingJoystick = true;
@@ -213,8 +175,8 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
                     deltaY = Math.sin(angle) * maxDistance;
                 }
 
-                joystickPuck.style.left = `${50 + deltaX}px`;
-                joystickPuck.style.top = `${50 + deltaY}px`;
+                joystickPuck.style.left = ${50 + deltaX}px;
+                joystickPuck.style.top = ${50 + deltaY}px;
 
                 joystickDelta.x = deltaX / maxDistance;
                 joystickDelta.y = deltaY / maxDistance;
@@ -244,8 +206,8 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
                     deltaY = Math.sin(angle) * maxDistance;
                 }
                
-                joystickPuck.style.left = `${50 + deltaX}px`;
-                joystickPuck.style.top = `${50 + deltaY}px`;
+                joystickPuck.style.left = ${50 + deltaX}px;
+                joystickPuck.style.top = ${50 + deltaY}px;
  
                 joystickDelta.x = deltaX / maxDistance;
                 joystickDelta.y = deltaY / maxDistance;
@@ -261,38 +223,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
             joystickDelta = { x: 0, y: 0 };
         });
 
-        /*joystickContainer.onPointerMoveObservable.add((eventData: BABYLON.IPointerEvent) => {
-            if (isDraggingJoystick) {
-                const deltaX = eventData.x - initialTouchPoint.x;
-                const deltaY = eventData.y - initialTouchPoint.y;
-                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                const maxDistance = 50;
         
-                // Constrain movement within max distance
-                if (distance > maxDistance) {
-                    const angle = Math.atan2(deltaY, deltaX);
-                    joystickDelta.x = Math.cos(angle) * maxDistance;
-                    joystickDelta.y = Math.sin(angle) * maxDistance;
-                } else {
-                    joystickDelta.x = deltaX;
-                    joystickDelta.y = deltaY;
-                }
-        
-                joystickPuck.left = `${50 + joystickDelta.x}px`; // Updating joystick position
-                joystickPuck.top = `${50 + joystickDelta.y}px`; // Updating joystick position
-        
-                // Prevent default behavior (useful for touch/mouse interactions)
-                eventData.event.preventDefault();
-            }
-        });
-        
-        // When the user releases the joystick (onPointerUp)
-        joystickContainer.onPointerUpObservable.add(() => {
-            isDraggingJoystick = false;
-            joystickPuck.left = "50px"; // Reset position
-            joystickPuck.top = "50px"; // Reset position
-            joystickDelta = { x: 0, y: 0 }; // Reset delta
-        });*/
 
         // canvasの親要素に追加
         if (canvas.parentElement) {
@@ -331,7 +262,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
         scene.registerBeforeRender(() => {
             
             const forward = camera.getFrontPosition(1).subtract(camera.position).normalize();
-            const right = Vector3.Cross(forward, camera.upVector).normalize();
+            const right = BABYLON.Vector3.Cross(forward, camera.upVector).normalize();
 
             
             const moveVector = forward.scale(-joystickDelta.y).add(right.scale(-joystickDelta.x));
@@ -365,16 +296,16 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
         });
 
 
-    let Bdoor: AbstractMesh | null | undefined;
+    let Bdoor: BABYLON.AbstractMesh | null | undefined;
 
-    SceneLoader.ImportMeshAsync("", "./scene/", "sinden.glb", scene).then((result) => {
+    BABYLON.SceneLoader.ImportMeshAsync("", "./scene/", "sinden.glb", scene).then((result) => {
         result.meshes.forEach((mesh) => {
             console.log("Loaded mesh name:", mesh.name);
         });
         
 
         for (let i = 0; i <= 4; i++) {
-            const meshName = `Cube${i}`;
+            const meshName = Cube${i};
             const mesh = result.meshes.find(mesh => mesh.name === meshName);
             if (mesh) {
                 mesh.checkCollisions = true;
@@ -391,7 +322,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
 
         scene.onPointerObservable.add((pointerInfo) => {
             switch (pointerInfo.type) {
-                case PointerEventTypes.POINTERDOWN://クリックが押されたときの判定
+                case BABYLON.PointerEventTypes.POINTERDOWN://クリックが押されたときの判定
                     
                     if(pointerInfo.pickInfo && pointerInfo.pickInfo.hit) {
                         console.log("clicked");
@@ -419,7 +350,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
                         }
                     }
                     break;
-                case PointerEventTypes.POINTERUP:
+                case BABYLON.PointerEventTypes.POINTERUP:
                     
                     
                     break;
@@ -445,13 +376,9 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
     };
   }, []);
 
-  return <Scanvas ref={canvasRef} style={{ width: '100vw', height: '100vh' }} />;
+  return <canvas ref={canvasRef} style={{ width: '100vw', height: '100vh' }} />;
 };
 
-const Scanvas = styled.canvas`
-  width: 100vw;
-  height: 100vh;
-  display: block;
-`;
+
 
 export default BabylonScene;
