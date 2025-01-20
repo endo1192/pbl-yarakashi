@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "npm run build && cp -R .vercel/output/functions ./functions",
+    "deploy": "next build && cp -R .vercel/output/functions ./functions",
     "lint": "next lint"
   },
   "dependencies": {
