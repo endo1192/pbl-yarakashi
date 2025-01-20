@@ -8,4 +8,12 @@ const nextConfig: NextConfig = {
   },
 };
 
+module.exports = {
+  experimental: {
+    appDir: true, 
+  },
+  output: 'standalone',
+};
+
+
 export default nextConfig;
