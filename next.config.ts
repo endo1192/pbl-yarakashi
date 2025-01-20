@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
     styledComponents: true,
   },
   output: 'standalone',
-  webpack(config, { isServer }) {
+
+  /*webpack(config, { isServer }) {
     if (!isServer) {
       // クライアントサイドのビルド最適化
       config.optimization.splitChunks = {
@@ -19,7 +20,17 @@ const nextConfig: NextConfig = {
       };
     }
     return config;
+  },*/
+
+  webpack: (config) => {
+    config.optimization.splitChunks = {
+      chunks: 'all',
+      maxSize: 2500000,
+    };
+    config.resolve.fallback = { fs: false, path: false };
+    return config;
   },
+
 };
 
 export default withBundleAnalyzer(nextConfig);

@@ -16,6 +16,7 @@
     "@prisma/client": "^6.0.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@types/next": "^9.0.0",
     "babylonjs": "^7.37.0",
     "babylonjs-gui": "^7.37.0",
     "babylonjs-loaders": "^7.37.0",
