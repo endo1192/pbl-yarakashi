@@ -6,12 +6,6 @@ const nextConfig: NextConfig = {
   compiler:{
     styledComponents: true,
   },
-};
-
-module.exports = {
-  experimental: {
-    appDir: true, 
-  },
   output: 'standalone',
 };
 
