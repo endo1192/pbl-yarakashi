@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import * as BABYLON from 'babylonjs';
-import 'babylonjs-loaders';
-import 'babylonjs-gui';
+//import * as BABYLON from 'babylonjs';
+//import 'babylonjs-loaders';
+import { Engine, Scene, Vector3, FreeCamera, HemisphericLight, SceneLoader, PointerEventTypes, AbstractMesh } from 'babylonjs';
 import { AdvancedDynamicTexture, Button, Control } from 'babylonjs-gui';
 import { useRouter } from 'next/router';
 import styled from "styled-components";
@@ -15,8 +15,8 @@ const BabylonScene = () => {
   useEffect(() => {
     // シーンの初期化
     const canvas = canvasRef.current as HTMLCanvasElement | null;
-    const engine = new BABYLON.Engine(canvas, true);
-    const scene = new BABYLON.Scene(engine);
+    const engine = new Engine(canvas, true);
+    const scene = new Scene(engine);
 
     
     if (!canvas) {
@@ -29,21 +29,21 @@ const BabylonScene = () => {
     canvas.style.height = '100%';
     canvas.style.display = 'block';
 
-    scene.gravity = new BABYLON.Vector3(0, -0.9, 0);
+    scene.gravity = new Vector3(0, -0.9, 0);
 
     
-    const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(3, 2, 30), scene);
+    const camera = new FreeCamera("camera1", new Vector3(3, 2, 30), scene);
     
     camera.attachControl(canvas, true);
     camera.inputs.addMouseWheel();
         
-    camera.setTarget(BABYLON.Vector3.Zero());
+    camera.setTarget(Vector3.Zero());
    
     scene.collisionsEnabled = true;
  
     camera.checkCollisions = true;
         
-    camera.ellipsoid = new BABYLON.Vector3(1,1,0.7);
+    camera.ellipsoid = new Vector3(1,1,0.7);
 
     camera.applyGravity = true;
 
@@ -52,7 +52,7 @@ const BabylonScene = () => {
     camera.inertia = 0.8;
     
     
-    const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
+    const light = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
     console.log(light); 
 
     let isJumping = false;
@@ -110,7 +110,7 @@ const BabylonScene = () => {
 
             
             const forward = camera.getFrontPosition(1).subtract(camera.position).normalize();
-            const right = BABYLON.Vector3.Cross(forward, camera.upVector).normalize();
+            const right = Vector3.Cross(forward, camera.upVector).normalize();
 
             
             const moveVector = forward.scale(-joystickDelta.y).add(right.scale(-joystickDelta.x));
@@ -331,7 +331,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
         scene.registerBeforeRender(() => {
             
             const forward = camera.getFrontPosition(1).subtract(camera.position).normalize();
-            const right = BABYLON.Vector3.Cross(forward, camera.upVector).normalize();
+            const right = Vector3.Cross(forward, camera.upVector).normalize();
 
             
             const moveVector = forward.scale(-joystickDelta.y).add(right.scale(-joystickDelta.x));
@@ -365,9 +365,9 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
         });
 
 
-    let Bdoor: BABYLON.AbstractMesh | null | undefined;
+    let Bdoor: AbstractMesh | null | undefined;
 
-    BABYLON.SceneLoader.ImportMeshAsync("", "./scene/", "sinden.glb", scene).then((result) => {
+    SceneLoader.ImportMeshAsync("", "./scene/", "sinden.glb", scene).then((result) => {
         result.meshes.forEach((mesh) => {
             console.log("Loaded mesh name:", mesh.name);
         });
@@ -391,7 +391,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
 
         scene.onPointerObservable.add((pointerInfo) => {
             switch (pointerInfo.type) {
-                case BABYLON.PointerEventTypes.POINTERDOWN://クリックが押されたときの判定
+                case PointerEventTypes.POINTERDOWN://クリックが押されたときの判定
                     
                     if(pointerInfo.pickInfo && pointerInfo.pickInfo.hit) {
                         console.log("clicked");
@@ -419,7 +419,7 @@ joystickPuck.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_CENTER;*/
                         }
                     }
                     break;
-                case BABYLON.PointerEventTypes.POINTERUP:
+                case PointerEventTypes.POINTERUP:
                     
                     
                     break;
