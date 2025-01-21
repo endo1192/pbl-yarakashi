@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
+
 const BabylonScene = () => {
   const canvasRef = useRef(null);
   //const engineRef = useRef(null);
@@ -55,9 +56,9 @@ const BabylonScene = () => {
     const jumpHeight = 2.1;   
     
 
-    const advancedTexture = BABYLON.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-    const jumpButton = BABYLON.Button.CreateSimpleButton("jumpButton", "Jump");
+    const jumpButton = Button.CreateSimpleButton("jumpButton", "Jump");
     jumpButton.width = "150px";
     jumpButton.height = "40px";
     jumpButton.color = "white";
@@ -65,8 +66,8 @@ const BabylonScene = () => {
 
 
         
-    jumpButton.horizontalAlignment = BABYLON.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    jumpButton.verticalAlignment = BABYLON.Control.VERTICAL_ALIGNMENT_BOTTOM;
+    jumpButton.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
+    jumpButton.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
     jumpButton.left = "-20px"; 
     jumpButton.top = "-20px"; 
 
@@ -175,8 +176,8 @@ const BabylonScene = () => {
                     deltaY = Math.sin(angle) * maxDistance;
                 }
 
-                joystickPuck.style.left = ${50 + deltaX}px;
-                joystickPuck.style.top = ${50 + deltaY}px;
+                joystickPuck.style.left = `${50 + deltaX}px`;
+                joystickPuck.style.top = `${50 + deltaY}px`;
 
                 joystickDelta.x = deltaX / maxDistance;
                 joystickDelta.y = deltaY / maxDistance;
@@ -206,8 +207,8 @@ const BabylonScene = () => {
                     deltaY = Math.sin(angle) * maxDistance;
                 }
                
-                joystickPuck.style.left = ${50 + deltaX}px;
-                joystickPuck.style.top = ${50 + deltaY}px;
+                joystickPuck.style.left = `${50 + deltaX}px`;
+                joystickPuck.style.top = `${50 + deltaY}px`;
  
                 joystickDelta.x = deltaX / maxDistance;
                 joystickDelta.y = deltaY / maxDistance;
@@ -305,7 +306,7 @@ const BabylonScene = () => {
         
 
         for (let i = 0; i <= 4; i++) {
-            const meshName = Cube${i};
+            const meshName = `Cube${i}`;
             const mesh = result.meshes.find(mesh => mesh.name === meshName);
             if (mesh) {
                 mesh.checkCollisions = true;
