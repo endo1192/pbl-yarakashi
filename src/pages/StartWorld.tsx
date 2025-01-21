@@ -375,7 +375,7 @@ const BabylonScene = () => {
       window.removeEventListener('resize', () => engine.resize());
       engine.dispose();
     };
-  }, []);
+  }, [router]);
 
   return <canvas ref={canvasRef} style={{ width: '100vw', height: '100vh' }} />;
 };
