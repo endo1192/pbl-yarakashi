@@ -11,14 +11,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babylonjs/core": "^7.44.1",
+    "@babylonjs/gui": "^7.44.1",
+    "@babylonjs/loaders": "^7.44.1",
     "@hookform/resolvers": "^3.9.1",
     "@next/bundle-analyzer": "^15.1.5",
     "@prisma/client": "^6.0.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@types/babylonjs": "^2.3.31",
     "@types/next": "^9.0.0",
-    "babylonjs": "^7.37.0",
-    "babylonjs-gui": "^7.37.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.462.0",
@@ -32,7 +34,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/babylonjs": "^2.3.31",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

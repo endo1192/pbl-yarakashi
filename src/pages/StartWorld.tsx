@@ -11,6 +11,8 @@ const BabylonScene = () => {
   useEffect(() => {
     
     const canvas = canvasRef.current as HTMLCanvasElement | null;
+    if (!canvas) return; 
+
     const engine = new BABYLON.Engine(canvas, true);
     const scene = new BABYLON.Scene(engine);
 
@@ -30,8 +32,11 @@ const BabylonScene = () => {
     
     const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(3, 2, 30), scene);
     
-    camera.attachControl(canvas, true);
+    //camera.attachControl(canvas, true);
+    camera.attachControl(canvas as unknown as HTMLElement, true);
+
     camera.inputs.addMouseWheel();
+    
         
     camera.setTarget(BABYLON.Vector3.Zero());
    
