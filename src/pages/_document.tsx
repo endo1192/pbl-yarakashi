@@ -6,11 +6,13 @@ export default function Document() {
     <Html lang="en">
       <Head>
           {/* Babylon.js CDN */}
-          <Script src="https://cdn.babylonjs.com/babylon.js" strategy="afterInteractive" ></Script>
-          <Script src="https://cdn.babylonjs.com/babylonjs-gui.min.js" strategy="afterInteractive" ></Script>
-          <Script src="https://cdn.babylonjs.com/babylonjs-loaders.min.js" strategy="afterInteractive" ></Script>
-          <Script src="https://cdn.jsdelivr.net/npm/@types/babylonjs@latest" strategy="afterInteractive" ></Script>
-          <Script src="https://cdn.jsdelivr.net/npm/@types/babylonjs-gui@latest" strategy="afterInteractive" ></Script>
+          <Script src="https://cdn.babylonjs.com/babylon.js" strategy="beforeInteractive" ></Script>
+          <Script src="https://cdn.babylonjs.com/babylonjs-gui.min.js" strategy="beforeInteractive" ></Script>
+          {/*<Script src="https://cdn.babylonjs.com/babylonjs-loaders.min.js" strategy="beforeInteractive" ></Script>*/}
+          <Script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js" strategy="beforeInteractive" ></Script>
+
+          {/*<Script src="https://cdn.jsdelivr.net/npm/@types/babylonjs@latest" strategy="beforeInteractive" ></Script>
+          <Script src="https://cdn.jsdelivr.net/npm/@types/babylonjs-gui@latest" strategy="beforeInteractive" ></Script>*/}
 
 
           {/* 他のCDNをここに追加できます */}

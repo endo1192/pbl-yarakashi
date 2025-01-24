@@ -2,16 +2,105 @@ import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 
-const BabylonScene = () => {
+
+const BabylonScene = ({ scene }: { scene: BABYLON.Scene }) => {
   const canvasRef = useRef(null);
   //const engineRef = useRef(null);
 
   const router = useRouter();
 
   useEffect(() => {
+
+    const BABYLON = window.BABYLON as any;
+
+    /*console.log('window.BABYLON:', window.BABYLON);
+  if (!window.BABYLON) {
+    console.error('Babylon.js is not loaded.');
+    return;
+  }
+
+  // GUIモジュールが存在するか確認
+  if (!window.BABYLON.GUI) {
+    console.error("Babylon.js GUI module is not loaded.");
+    return;
+  }*/
+
+    /*const checkBABYLON = () => {
+        if (window.BABYLON) {
+          console.log("BABYLON is loaded:", window.BABYLON);
+          
+          if (window.BABYLON.GUI) {
+            console.log("BABYLON.GUI is loaded:", window.BABYLON.GUI);
+          } else {
+            console.error("BABYLON.GUI module is not loaded.");
+          }
+        } else {
+          console.error("BABYLON is not loaded.");
+        }
+    };
+      
+    checkBABYLON(); // 初期化を呼び出す*/
+
     
+
+    const checkBABYLON = () => {
+        setTimeout(() => {
+          if (window.BABYLON && window.BABYLON.GUI) {
+            console.log("BABYLON.GUI is loaded");
+            // GUIの初期化処理をここに追加
+            const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            console.log(advancedTexture); // 初期化後のログ
+
+            const jumpButton = BABYLON.GUI.Button.CreateSimpleButton("jumpButton", "Jump");
+            console.log(jumpButton);
+            jumpButton.width = "150px";
+            jumpButton.height = "40px";
+            jumpButton.color = "white";
+            jumpButton.background = "green";
+
+
+        
+            jumpButton.horizontalAlignment = Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            jumpButton.verticalAlignment = Control.VERTICAL_ALIGNMENT_BOTTOM;
+            jumpButton.left = "-20px"; 
+            jumpButton.top = "-20px"; 
+
+        
+             
+
+            jumpButton.onPointerUpObservable.add(() => {
+                console.log("Jump button pressed");
+                if (!isJumping) {
+                    isJumping = true;
+                    jumpVelocity = jumpSpeed; 
+                }
+            });
+
+            advancedTexture.addControl(jumpButton);
+
+            
+          
+    
+      checkBABYLON();
+    } 
+
+    else {
+      console.error("BABYLON.GUI module is not loaded.");
+    }
+  }, 1000); // 1秒遅延を与える
+};
+
+
     const canvas = canvasRef.current as HTMLCanvasElement | null;
     if (!canvas) return; 
+
+    //const BABYLON = window.BABYLON; // CDNで読み込んだBabylon.jsを使用
+
+    // 型アサーションでBABYLON.GUIを認識させる
+    //const BABYLON = window.BABYLON as typeof import("babylonjs");
+
+    
+
 
     const engine = new BABYLON.Engine(canvas, true);
     const scene = new BABYLON.Scene(engine);
@@ -23,6 +112,30 @@ const BabylonScene = () => {
     }
 
     
+
+    BABYLON.SceneLoader.ImportMeshAsync("", "/scene/", "sinden.glb", scene).then((result: any) => {
+        result.meshes.forEach((mesh: any) => {
+            console.log("Loaded mesh name:", mesh.name);
+        });
+        
+
+        for (let i = 0; i <= 4; i++) {
+            const meshName = `Cube${i}`;
+            const mesh = result.meshes.find(mesh => mesh.name === meshName);
+            if (mesh) {
+                mesh.checkCollisions = true;
+            }
+        }
+
+        Bdoor = result.meshes.find(mesh => mesh.name === "Bdoor");
+        if (!Bdoor) {
+            console.error("Bdoor mesh not found in the loaded scene.");
+        }
+    }).catch((error: any) => {
+        console.error("Failed to load GLB file:", error);
+      });
+
+    
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
@@ -31,11 +144,16 @@ const BabylonScene = () => {
 
     
     const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(3, 2, 30), scene);
+
+    
     
     //camera.attachControl(canvas, true);
     camera.attachControl(canvas as unknown as HTMLElement, true);
 
     camera.inputs.addMouseWheel();
+
+    console.log(camera.inputs);
+
     
         
     camera.setTarget(BABYLON.Vector3.Zero());
@@ -61,10 +179,13 @@ const BabylonScene = () => {
     const jumpHeight = 2.1;   
     
 
-    const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    //const advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    // GUIの初期化
+    //const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-    const jumpButton = Button.CreateSimpleButton("jumpButton", "Jump");
-    jumpButton.width = "150px";
+
+    //const jumpButton = Button.CreateSimpleButton("jumpButton", "Jump");
+    /*jumpButton.width = "150px";
     jumpButton.height = "40px";
     jumpButton.color = "white";
     jumpButton.background = "green";
@@ -85,8 +206,9 @@ const BabylonScene = () => {
             isJumping = true;
             jumpVelocity = jumpSpeed; 
         }
-    });
+    });*/
 
+        let jumpVelocity = 0;
         
         scene.registerBeforeRender(() => {
             
@@ -124,7 +246,7 @@ const BabylonScene = () => {
             }
         });
 
-        advancedTexture.addControl(jumpButton);
+        
 
 
         
@@ -304,25 +426,7 @@ const BabylonScene = () => {
 
     let Bdoor: BABYLON.AbstractMesh | null | undefined;
 
-    BABYLON.SceneLoader.ImportMeshAsync("", "./scene/", "sinden.glb", scene).then((result) => {
-        result.meshes.forEach((mesh) => {
-            console.log("Loaded mesh name:", mesh.name);
-        });
-        
-
-        for (let i = 0; i <= 4; i++) {
-            const meshName = `Cube${i}`;
-            const mesh = result.meshes.find(mesh => mesh.name === meshName);
-            if (mesh) {
-                mesh.checkCollisions = true;
-            }
-        }
-
-        Bdoor = result.meshes.find(mesh => mesh.name === "Bdoor");
-        if (!Bdoor) {
-            console.error("Bdoor mesh not found in the loaded scene.");
-        }
-    });
+    
 
     const pointerToKey = new Map()    
 
@@ -363,6 +467,11 @@ const BabylonScene = () => {
             }
         });
 
+
+    
+
+    
+
     engine.runRenderLoop(() => {
       scene.render();
     });
@@ -378,9 +487,9 @@ const BabylonScene = () => {
         joystickContainer.parentElement.removeChild(joystickContainer);
       }
       window.removeEventListener('resize', () => engine.resize());
-      engine.dispose();
+      //engine.dispose();
     };
-  }, [router]);
+  }, [scene]);
 
   return <canvas ref={canvasRef} style={{ width: '100vw', height: '100vh' }} />;
 };
